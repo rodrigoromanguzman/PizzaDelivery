@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Completar datos de envio y pago</h1>
+    <h2>La pizza Creada:</h2>
+    <h3 th:text="${pizzaOrder.pizzas[0].name}"></h3>
+    <ul>
+        <li th:each="ingredient:${pizzaOrder.pizzas[0].ingredients}">
+            <p th:text="${ingredient.name}"></p>
+        </li>
+    </ul>
+    <br/>
+    <h1>Datos de envio</h1>
+    <form method="POST" th:action="@{/orders}" th:object = "${pizzaOrder}">
+    <div>
+        <input type="text" th:field="*{deliveryName}" placeholder="Nombre del cliente">
+        <span th:if="*{#fields.hasErrors('deliveryName')}" th:errors="*{deliveryName}"></span>
+    </div>
+    <div>
+        <input type="text" th:field="*{deliveryStreet}" placeholder="Calle">
+        <span th:if="*{#fields.hasErrors('deliveryStreet')}" th:errors="*{deliveryStreet}"></span>
+
+    </div>
+    <div>
+        <input type="text" th:field="*{deliveryCity}" placeholder="Ciudad">
+        <span th:if="*{#fields.hasErrors('deliveryCity')}" th:errors="*{deliveryCity}"></span>
+    </div>
+    <div>
+        <input type="text" th:field="*{deliveryState}" placeholder="Estado">
+        <span th:if="*{#fields.hasErrors('deliveryState')}" th:errors="*{deliveryState}"></span>
+    </div>
+    <div>
+        <input type="text" th:field="*{deliveryZip}" placeholder="Coigo Postal">
+        <span th:if="*{#fields.hasErrors('deliveryZip')}" th:errors="*{deliveryZip}"></span>
+    </div>
+    <h1>Datos de pago</h1>
+    <div>
+        <input type="text" th:field="*{ccNumber}" placeholder="Numero de tarjeta">
+        <span th:if="*{#fields.hasErrors('ccNumber')}" th:errors="*{ccNumber}"></span>
+    </div>
+    <div>
+        <input type="text" th:field="*{ccExpiration}" placeholder="Expiracion">
+        <span th:if="*{#fields.hasErrors('ccExpiration')}" th:errors="*{ccExpiration}"></span>
+
+    </div>
+    <div>
+        <input type="text" th:field="*{ccCVV}" placeholder="Codigo de seguridad">
+        <span th:if="*{#fields.hasErrors('ccCVV')}" th:errors="*{ccCVV}"></span>
+    </div>
+        <button>Crear orden</button>
+    </form>
+</body>
+</html>
